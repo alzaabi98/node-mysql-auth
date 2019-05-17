@@ -2,6 +2,11 @@
     <div class="col s6 offset-s3">
 
 
+        {{#if errors}}
+        {{#each errors}}
+        <div class="card-panel red lighten-2"> {{msg}}</div>
+        {{/each}}
+        {{/if}}
 
         <div class="card">
 
