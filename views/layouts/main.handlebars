@@ -15,9 +15,14 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Auth With SQL/Node</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {{#if user}}
                 <li><a href="/users/logout">Logout</a></li>
+                {{else}}
                 <li><a href="/users/login">Login</a></li>
                 <li><a href="/users/register">Register</a></li>
+                {{/if}}
+
+
             </ul>
         </div>
     </nav>
