@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const app = new express();
 const session = require("express-session");
 const flash = require("connect-flash");
-
+const passport = require("passport");
 const port = 5000;
 //body parser
 //configure session and flash
@@ -16,6 +16,11 @@ app.use(
     saveUninitialized: true
   })
 );
+// incude passpor
+require("./config/passport");
+// add passport
+app.use(passport.initialize());
+app.use(passport.session());
 //configure passport
 app.use(flash());
 // add middleware for flash messages
