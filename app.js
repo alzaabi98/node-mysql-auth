@@ -18,6 +18,18 @@ app.use(
 );
 //configure passport
 app.use(flash());
+// add middleware for flash messages
+
+app.use((req, res, next) => {
+  res.locals.successMessage = req.flash("successMessage");
+  res.locals.errorMessage = req.flash("errorMessage");
+  res.locals.error = req.flash("error");
+
+  if (req.user) {
+    res.locals.user = req.user;
+  }
+  next();
+});
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

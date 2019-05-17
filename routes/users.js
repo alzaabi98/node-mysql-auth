@@ -64,22 +64,22 @@ router.post("/register", (req, res) => {
             bcrypt.hash(password, salt, (err, hash) => {
               if (err) throw err;
               newUser.password = hash;
+              newUser
+                .save()
+                .then(user => {
+                  console.log("user created");
+                  req.flash(
+                    "successMessage",
+                    " your account is created ,please login"
+                  );
+                  res.redirect("/users/login");
+                })
+                .catch(err => {
+                  console.log(err);
+                  req.flash("ErrorMessage", "There an error");
+                  res.redirect("/users/register");
+                }); //end new user
             });
-            newUser
-              .save()
-              .then(user => {
-                console.log("user created");
-                req.flash(
-                  "successMessage",
-                  " your account is created ,please login"
-                );
-                res.redirect("/users/login");
-              })
-              .catch(err => {
-                console.log(err);
-                req.flash("ErrorMessage", "There an error");
-                res.redirect("/users/register");
-              });
           });
         }
       })
